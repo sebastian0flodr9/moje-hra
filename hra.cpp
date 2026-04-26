@@ -12,7 +12,7 @@ int main() {
 
     cout << "Ahoj, " << jmeno << "!" << endl;
     cout << "Mas " << zivoty << " zivotu." << endl;
-    cout << "Mas " << zlato << " zlatych." << endl;
+    cout << "Mas " << zlato << " zlataku." << endl;
 
     cout << "Zacinas ve vesnici." << endl;
 
