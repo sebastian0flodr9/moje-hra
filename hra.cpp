@@ -17,12 +17,12 @@ int main() {
     cout << "Zacinas ve vesnici." << endl;
 
     if (zivoty <= 0) {
-        cout << "Chyba: hrdina nema zivoty!" << endl;
+        cout << "Chyba- hrdina nema zivoty!" << endl;
         return 1;
     }
 
     if (zlato < 0) {
-        cout << "Chyba: zaporne zlato!" << endl;
+        cout << "Chyba- zaporne zlato!" << endl;
         return 1;
     }
 
