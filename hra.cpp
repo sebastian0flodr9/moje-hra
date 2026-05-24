@@ -96,12 +96,57 @@ int main() {
             zivoty = maxzivoty;
             zlato -= 5;
             cout << "doplnil sis zivoty na maxxxximum :) /n";
-           } else cout << "nemas dost zlata broski /n"
+           } else cout << "nemas dost zlata broski /n";
 
-        }else if (vesnicevolba == 2)
-     }
+        }else if (vesnicevolba == 2) {
+            if (zlato >= 10) {
+                maxzivoty += 5;
+                zivoty = maxzivoty;
+                zlato -= 10;
+                cout << "Zvysil sis max HP o 5.\n";
+            } else cout << "Nemas dost zlata.\n";
+        }
+        else if (vesnicevolba == 3) {
+            if (zlato >= 10) {
+                maxmana += 2;
+                mana = maxmana;
+                zlato -= 10;
+                cout << "Zvysil sis max manu o 2.\n";
+            } else cout << "Nemas dost zlata.\n";
+        }
+        else if (vesnicevolba == 4) {
+            if (zlato >= 15) {
+                utok += 1;
+                zlato -= 15;
+                cout << "Zvysil sis utok o 1.\n";
+            } else cout << "Nemas dost zlata.\n";
+        }
+        else if (vesnicevolba == 5) {
+            cout << "Opoustis vesnici...\n";
+        }
+        else {
+            cout << "Neplatna volba.\n";
+        }
+    }
 
-    cout << "Vse pripraveno, dobrodruzstvi muze zacit!" << endl;
 
+    cout << "\n vydavas se na cestu " << jmeno << "... \n";
+
+
+    int monsterhp;
+    int monsteratk;
+    int pocetmonstr;
+    int i;
+    int drop;
+
+
+    cout << "\nNarazil jsi na prvni monstrum!!!!!\n";
+    monsterhp = 6;
+    monsteratk = 2;
+    pocetmonstr = 1;
+
+    while (monsterhp > 0 && zivoty > 0){
+        cout << "\n-----souboj s 1x monstrem----- \n";
+    }
     return 0;
 }
