@@ -16,7 +16,7 @@ int main() {
     int maxmana;
 
     int lvl = 1;
-    int xp = 0; int xpPotreba = 10;
+    int xp = 0; int xppotreba = 10;
      srand(time(0));
 
 
@@ -91,44 +91,58 @@ int main() {
         cout << "Tvoje volba: ";
         cin >> vesnicevolba;
 
-        if (vesnicevolba == 1){
-           if (zlato >= 5){
+     switch (vesnicevolba) {
+
+    case 1: //doplnis zivoty si
+        if (zlato >= 5) {
             zivoty = maxzivoty;
             zlato -= 5;
-            cout << "doplnil sis zivoty na maxxxximum :) /n";
-           } else cout << "nemas dost zlata broski /n";
+            cout << "Doplnil sis zivoty na maximum :)\n";
+        } else {
+            cout << "Nemas dost zlata broski\n";
+        }
+        break;
 
-        }else if (vesnicevolba == 2) {
-            if (zlato >= 10) {
-                maxzivoty += 5;
-                zivoty = maxzivoty;
-                zlato -= 10;
-                cout << "Zvysil sis max HP o 5.\n";
-            } else cout << "Nemas dost zlata.\n";
+    case 2: // zvysisis si hp
+        if (zlato >= 10) {
+            maxzivoty += 5;
+            zivoty = maxzivoty;
+            zlato -= 10;
+            cout << "Zvysil sis max HP o 5.\n";
+        } else {
+            cout << "Nemas dost zlata.\n";
         }
-        else if (vesnicevolba == 3) {
-            if (zlato >= 10) {
-                maxmana += 2;
-                mana = maxmana;
-                zlato -= 10;
-                cout << "Zvysil sis max manu o 2.\n";
-            } else cout << "Nemas dost zlata.\n";
-        }
-        else if (vesnicevolba == 4) {
-            if (zlato >= 15) {
-                utok += 1;
-                zlato -= 15;
-                cout << "Zvysil sis utok o 1.\n";
-            } else cout << "Nemas dost zlata.\n";
-        }
-        else if (vesnicevolba == 5) {
-            cout << "Opoustis vesnici...\n";
-        }
-        else {
-            cout << "Neplatna volba.\n";
-        }
-    }
+        break;
 
+    case 3: // zvysisi max manu
+        if (zlato >= 10) {
+            maxmana += 2;
+            mana = maxmana;
+            zlato -= 10;
+            cout << "Zvysil sis max manu o 2.\n";
+        } else {
+            cout << "Nemas dost zlata.\n";
+        }
+        break;
+
+    case 4: // zvysis max utok
+        if (zlato >= 15) {
+            utok += 1;
+            zlato -= 15;
+            cout << "Zvysil sis utok o 1.\n";
+        } else {
+            cout << "Nemas dost zlata.\n";
+        }
+        break;
+
+    case 5: // proste livnes vesnici
+        cout << "Opoustis vesnici..\n";
+        break;
+
+    default:
+        cout << "Neplatna volba.\n";
+        break;
+}
 
     cout << "\n vydavas se na cestu " << jmeno << "... \n";
 
@@ -137,7 +151,7 @@ int main() {
     int monsteratk;
     int pocetmonstr;
     int i;
-    int drop;
+
 
 
     cout << "\nNarazil jsi na prvni monstrum!!!!!\n";
@@ -147,6 +161,86 @@ int main() {
 
     while (monsterhp > 0 && zivoty > 0){
         cout << "\n-----souboj s 1x monstrem----- \n";
+        cout << "Tve HP: " << zivoty << "/" << maxzivoty << " | Mana: " << mana << "/" << maxmana << " | Level: " << lvl << " | XP: " << xp << "/" << xppotreba<< "\n";
+        cout << "HP monstra: " << monsterhp << "\n";
+
+        cout << "1) Utok\n";
+        cout << "2) Specialni schopnost (pokud mas manu)\n";
+        cout << "3) Obrana (snizeni dmg)\n";
+        cout << "Tvoje volba: ";
+        cin >> volba;
+
+        int dmghrac = 0;
+        int dmgmonstrum = monsteratk;
+
+        if (volba == 1) {
+            dmghrac = utok;
+            cout << "Zautocil jsi a ubral " << dmghrac << " zivotu.\n";
+        }
+        else if (volba == 2) {
+            if (mana > 0) {
+                if (narodnost == "Paladin") {
+                    dmghrac = utok + 2;
+                    zivoty += 2;
+                    if (zivoty > maxzivoty) zivoty = maxzivoty;
+                    mana -= 1;
+                    cout << "Paladin pouzil svatou ranu! Dmg+" << 2 << " a leceni +2.\n";
+                }
+                else if (narodnost == "Lovec") {
+                    dmghrac = utok + 3;
+                    mana -= 1;
+                    cout << "Lovec pouzil presnou strelu! Dmg+" << 3 << ".\n";
+                }
+                else if (narodnost == "Mag") {
+                    dmghrac = utok + 4;
+                    mana -= 2;
+                    cout << "Mag seslal ohnivou kouli! Dmg+" << 4 << ".\n";
+                }
+            } else {
+                cout << "Nemas dost many, utocis normalne.\n";
+                dmghrac = utok;
+            }
+        }
+        else if (volba == 3) {
+            dmghrac = utok / 2;
+            dmgmonstrum = monsteratk / 2;
+            cout << "Branis se, tvuj utok je mensi, ale i prijaty dmg.\n";
+        }
+        else {
+            cout << "Zmatene stojis, nic nedelas.\n";
+            dmghrac = 0;
+        }
+
+        monsterhp -= dmghrac;
+        if (monsterhp < 0) monsterhp = 0;
+
+        if (monsterhp > 0) {
+            zivoty -= dmgmonstrum;
+            cout << "Monstrum te zasahlo za " << dmgmonstrum << "!\n";
+        }
+
+        if (zivoty <= 0) {
+            cout << "Byl jsi zabit. Konec hry\n";
+            return 0;
+}
+}
+}
+  int drop;
+    cout << "porazil jsi monstrum !! (hura!) \n";
+    xp +=5  ;
+    drop = rand() % 2;
+     if (drop == 1) {
+        zlato += 5;
+        cout << "Ziskal jsi 5 zlata.\n";
+    } else {
+        zlato += 2;
+        cout << "Tentokrat moc zlata nespadlo(2).\n";
+
     }
-    return 0;
+
+
+
+
+
+
 }
